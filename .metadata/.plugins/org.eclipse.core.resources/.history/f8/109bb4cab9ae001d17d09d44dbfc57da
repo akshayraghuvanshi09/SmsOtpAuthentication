@@ -1,0 +1,26 @@
+package com.ar;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.ar.config.TwilioConfig;
+import com.twilio.Twilio;
+
+import jakarta.annotation.PostConstruct;
+
+@SpringBootApplication
+public class TwilioOtpExampleApplication {
+	@Autowired
+	private TwilioConfig config;
+	
+	
+	@PostConstruct
+	public void initTwilio() {
+		Twilio.init(config.getAccountSid(), config.getAuthToken());
+	}
+	public static void main(String[] args) {
+		SpringApplication.run(TwilioOtpExampleApplication.class, args);
+	}
+
+}
